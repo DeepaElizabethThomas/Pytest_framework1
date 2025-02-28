@@ -15,13 +15,13 @@ def test_fetch_employee_data(db_connection):
     assert all(df_target['total_salary'] == df_source['salary'] + df_source['commission'].fillna(0)), "❌ total_salary calculation is incorrect!"
     print("✅ Data matched between source and target !")
 
-# def test_department_average(db_connection):
-#     source_connection, target_connection = db_connection
-#     """Verify department-wise  average salary calculation"""
-#     df_deptsource = pd.read_sql("SELECT department_id, AVG(salary) as total_salary FROM employee GROUP BY department_id", source_connection)
-#     df_depttarget = pd.read_sql("SELECT * FROM Department_Average", target_connection)
-#
-#     assert not df_depttarget.empty, "❌ Department_Average table is empty!"
+def test_department_average(db_connection):
+    source_connection, target_connection = db_connection
+    """Verify department-wise  average salary calculation"""
+    df_deptsource = pd.read_sql("SELECT department_id, AVG(salary) as total_salary FROM employee GROUP BY department_id", source_connection)
+    df_depttarget = pd.read_sql("SELECT * FROM Department_Average", target_connection)
+
+    assert not df_depttarget.empty, "❌ Department_Average table is empty!"
 #     # Ensure row counts match
 #     assert len(df_deptsource) == len(df_depttarget), "❌ Row count mismatch between source and target!"
 #
